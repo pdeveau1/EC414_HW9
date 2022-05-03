@@ -30,11 +30,14 @@ train_predLabels = yNum';
 yActual = trainData(:,3);
 train_accuracy = 100*nnz(yActual == train_predLabels)/length(train_predLabels);
 figure
+c = confusionchart(yActual,train_predLabels,"RowSummary","row-normalized","Normalization","row-normalized");
+title("Accuracy: "+string(train_accuracy))
+figure
 gscatter(trainPoints(1,:),trainPoints(2,:),train_predLabels)
-title('Predicted Classes for each training datapoint(two neurons)')
+title('Predicted Classes for each training datapoint')
 xlabel('x1')
 ylabel('x2')
-fprintf('The models accuracy on the training dataset, with a hidden layer of size two, is %.2f\n',train_accuracy);
+fprintf('The models accuracy on the training dataset, with a hidden layer of size two, is %d\n',train_accuracy);
 %% (c)Evaluate the model on the testing dataset
 %estimate the targets using the trained network
 %predict activity based on neural network
@@ -45,12 +48,16 @@ test_predLabels = yNum';
 %evaluate classification
 yActual = testData(:,3);
 test_accuracy = 100*nnz(yActual == test_predLabels)/length(test_predLabels);
+% figure
+% c = confusionchart(yActual,test_predLabels,"RowSummary","row-normalized","Normalization","row-normalized");
+% title("Accuracy: "+string(test_accuracy))
 figure
 gscatter(testPoints(1,:),testPoints(2,:),test_predLabels)
-title('Predicted Classes for each test datapoint(two neurons)')
+title('Predicted Classes for each test datapoint')
 xlabel('x1')
 ylabel('x2')
-fprintf('The models accuracy on the test dataset, with a hidden layer of size two, is %.2f\n',test_accuracy);
+fprintf('The models accuracy on the test dataset, with a hidden layer of size two, is %d\n',test_accuracy);
+
 %% (d)Create a new neural network with a hidden layer size of 10
 % (d)(a)Create a neural network with one hidden layer of size two
 net = patternnet(10);
@@ -74,10 +81,10 @@ yActual = trainData(:,3);
 train_accuracy = 100*nnz(yActual == train_predLabels)/length(train_predLabels);
 figure
 gscatter(trainPoints(1,:),trainPoints(2,:),train_predLabels)
-title('Predicted Classes for each training datapoint(ten neurons)')
+title('Predicted Classes for each training datapoint')
 xlabel('x1')
 ylabel('x2')
-fprintf('The models accuracy on the training dataset, with a hidden layer of size ten, is %.2f\n',train_accuracy);
+fprintf('The models accuracy on the training dataset, with a hidden layer of size ten, is %d\n',train_accuracy);
 %% (d)(c)Evaluate the model on the testing dataset
 %estimate the targets using the trained network
 %predict activity based on neural network
@@ -90,7 +97,7 @@ yActual = testData(:,3);
 test_accuracy = 100*nnz(yActual == test_predLabels)/length(test_predLabels);
 figure
 gscatter(testPoints(1,:),testPoints(2,:),test_predLabels)
-title('Predicted Classes for each test datapoint(ten neurons)')
+title('Predicted Classes for each test datapoint')
 xlabel('x1')
 ylabel('x2')
-fprintf('The models accuracy on the test dataset, with a hidden layer of size ten, is %.2f\n',test_accuracy);
+fprintf('The models accuracy on the test dataset, with a hidden layer of size ten, is %d\n',test_accuracy);
